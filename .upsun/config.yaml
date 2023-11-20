@@ -98,7 +98,7 @@ applications:
         # Set PIP_USER to 0 so that Poetry does not complain
         export PIP_USER=0
         # Install poetry as a global tool
-        pip install poetry==$POETRY_VERSION
+        pip3 install poetry==$POETRY_VERSION
         poetry config virtualenvs.create false
         poetry install  --no-root
         npm i
