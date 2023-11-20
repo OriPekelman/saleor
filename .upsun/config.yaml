@@ -67,7 +67,7 @@ applications:
     workers:
       celery:
         commands:
-        start: "celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B"
+          start: "celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B"
 
     # The timezone for crons to run. Format: a TZ database name. Defaults to UTC, which is the timezone used for all logs
     # no matter the value here. More information: https://docs.upsun.com/create-apps/timezone.html
