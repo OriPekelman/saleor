@@ -7,7 +7,7 @@ applications:
 
     # The runtime the application uses.
     # Complete list of available runtimes: https://docs.upsun.com/create-apps/app-reference.html#types
-    type: "python:3.11"
+    stack: ["python@3.9", "nodejs@20"]
 
     # How many resources to devote to the app. Defaults to AUTO in production environments.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#sizes
@@ -88,21 +88,6 @@ applications:
     # Outbound firewall rules for the application. More information: https://docs.upsun.com/create-apps/app-reference.html#firewall
     # firewall:
 
-    # Specifies a default set of build tasks to run. Flavors are language-specific.
-    # More information: https://docs.upsun.com/create-apps/app-reference.html#build
-    build:
-      flavor: none
-
-    # Installs global dependencies as part of the build process. They’re independent of your app’s dependencies and
-    # are available in the PATH during the build process and in the runtime environment. They’re installed before
-    # the build hook runs using a package manager for the language.
-    # More information: https://docs.upsun.com/create-apps/app-reference.html#dependencies
-    dependencies:
-      nodejs:
-        n: "*"
-        npx: "*"
-        sharp: "*"
-
     # Hooks allow you to customize your code/environment as the project moves through the build and deploy stages
     # More information: https://docs.upsun.com/create-apps/app-reference.html#hooks
     hooks:
@@ -113,12 +98,9 @@ applications:
         # Set PIP_USER to 0 so that Poetry does not complain
         export PIP_USER=0
         # Install poetry as a global tool
-        python -m venv /app/.global
         pip install poetry==$POETRY_VERSION
         poetry config virtualenvs.create false
         poetry install  --no-root
-        n auto || n lts
-        hash -r
         npm i
         # Collect static files so that they can be served by Upsun
         poetry run python manage.py collectstatic --noinput
