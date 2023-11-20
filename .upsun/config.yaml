@@ -97,9 +97,6 @@ applications:
     # are available in the PATH during the build process and in the runtime environment. They’re installed before
     # the build hook runs using a package manager for the language.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#dependencies
-    dependencies:
-      nodejs:
-        n: "*"
     # Hooks allow you to customize your code/environment as the project moves through the build and deploy stages
     # More information: https://docs.upsun.com/create-apps/app-reference.html#hooks
     hooks:
@@ -114,8 +111,6 @@ applications:
         pip install poetry==$POETRY_VERSION
         poetry config virtualenvs.create false
         poetry install  --no-root
-        n auto || n lts
-        hash -r
         npm i
         # Collect static files so that they can be served by Upsun
         poetry run python manage.py collectstatic --noinput
