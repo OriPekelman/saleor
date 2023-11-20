@@ -27,10 +27,10 @@ applications:
     # More information: https://docs.upsun.com/create-apps/app-reference.html#mounts
     mounts:
        "/.cache": # Represents the path in the app.
-         source: "local" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "storage" # "local" sources are unique to the app, while "service" sources can be shared among apps.
          source_path: "cache" # The subdirectory within the mounted disk (the source) where the mount should point.
        "media": # Represents the path in the app.
-         source: "local" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "storage" # "local" sources are unique to the app, while "service" sources can be shared among apps.
          source_path: "media" # The subdirectory within the mounted disk (the source) where the mount should point.
 
     # The web key configures the web server running in front of your app.
@@ -66,7 +66,8 @@ applications:
     # More information: https://docs.upsun.com/create-apps/app-reference.html#workers
     workers:
       celery:
-        start: "celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B"
+        commands:
+          start: "celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B"
 
     # The timezone for crons to run. Format: a TZ database name. Defaults to UTC, which is the timezone used for all logs
     # no matter the value here. More information: https://docs.upsun.com/create-apps/timezone.html
