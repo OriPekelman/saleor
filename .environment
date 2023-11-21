@@ -1,8 +1,14 @@
 #FIXME should come from expanded relationships
 export DATABASE_URL=pgsql://main:main@postgresql.internal:5432/main
 export REDIS_URL=redis://redis.internal:6379
-
+export PRIMARY_URL=$(\
+        echo ${PLATFORM_ROUTES} \
+        | base64 --decode \
+        | jq -r 'to_entries[] | select(.value.primary == true) | .key'
+      )
 export SECRET_KEY=$PLATFORM_PROJECT_ENTROPY
 export CACHE_URL=$REDIS_URL/0
 export CELERY_BROKER_URL==$REDIS_URL/1
 export EMAIL_URL=smtp:$PLATFORM_SMTP_HOST:25
+
+export ALLOWED_HOSTS=$(echo $PRIMARY_URL| awk -F/ '{print $3}')
