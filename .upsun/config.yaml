@@ -32,7 +32,9 @@ applications:
        "media": # Represents the path in the app.
          source: "storage" # "local" sources are unique to the app, while "service" sources can be shared among apps.
          source_path: "media" # The subdirectory within the mounted disk (the source) where the mount should point.
-
+       "celery": # Represents the path in the app.
+         source: "storage" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source_path: "celery" # The subdirectory within the mounted disk (the source) where the mount should point.
     # The web key configures the web server running in front of your app.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#web
     web:
@@ -67,7 +69,7 @@ applications:
     workers:
       celery:
         commands:
-          start: "celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B"
+          start: "celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B -s=celery/celerybeat-schedule.db "
 
     # The timezone for crons to run. Format: a TZ database name. Defaults to UTC, which is the timezone used for all logs
     # no matter the value here. More information: https://docs.upsun.com/create-apps/timezone.html
