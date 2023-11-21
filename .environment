@@ -1,3 +1,7 @@
+#FIXME should come from expanded relationships
+export DATABASE_URL=pgsql://main:main@postgresql.internal:5432/main
+export REDIS_URL=redis://redis.internal:6379
+
 export SECRET_KEY=$PLATFORM_PROJECT_ENTROPY
 export CACHE_URL=$REDIS_URL/0
 export CELERY_BROKER_URL==$REDIS_URL/1
