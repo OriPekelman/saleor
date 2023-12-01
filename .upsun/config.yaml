@@ -27,13 +27,16 @@ applications:
     # More information: https://docs.upsun.com/create-apps/app-reference.html#mounts
     mounts:
        "/.cache": # Represents the path in the app.
-         source: "storage" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "service" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         service: files
          source_path: "cache" # The subdirectory within the mounted disk (the source) where the mount should point.
        "media": # Represents the path in the app.
-         source: "storage" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "service" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         service: files
          source_path: "media" # The subdirectory within the mounted disk (the source) where the mount should point.
        "celery": # Represents the path in the app.
-         source: "storage" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         source: "service" # "local" sources are unique to the app, while "service" sources can be shared among apps.
+         service: files
          source_path: "celery" # The subdirectory within the mounted disk (the source) where the mount should point.
     # The web key configures the web server running in front of your app.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#web
@@ -155,8 +158,10 @@ services:
 
   redis:
     type: redis:7.0 # All available versions are: 7.0, 6.2
-
-  
+    # The name of the service container. Must be unique within a project.
+  # adding explicit network storage
+  files:
+        type: network-storage:2.0
 
 # The routes of the project.
 #
