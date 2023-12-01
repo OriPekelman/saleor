@@ -100,7 +100,7 @@ applications:
         # Set PIP_USER to 0 so that Poetry does not complain
         export PIP_USER=0
         # Install poetry as a global tool
-        # python -m venv /app/.global
+        python -m venv /app/.global
         echo "installing poetry $POETRY_VERSION"
         pip install poetry==$POETRY_VERSION
         poetry install --no-root
