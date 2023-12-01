@@ -119,8 +119,6 @@ applications:
         n 16.20.2
         hash -r
         npm i
-        npm run build-assets
-        npm run build-emails
         # Collect static files so that they can be served by Upsun
         poetry run python manage.py collectstatic --noinput
         
