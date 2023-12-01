@@ -116,7 +116,7 @@ applications:
         pip install poetry==$POETRY_VERSION
         poetry config virtualenvs.create false
         poetry install  --no-root
-        n 18.19.0
+        n 16.20.2
         hash -r
         npm i
         # Collect static files so that they can be served by Upsun
