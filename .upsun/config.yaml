@@ -101,9 +101,9 @@ applications:
         export PIP_USER=0
         # Install poetry as a global tool
         # python -m venv /app/.global
+        echo "installing poetry $POETRY_VERSION"
         pip install poetry==$POETRY_VERSION
-        poetry config virtualenvs.create false
-        poetry install  --no-root
+        poetry install --no-root
         npm i
         # Collect static files so that they can be served by Upsun
         poetry run python manage.py collectstatic --noinput
